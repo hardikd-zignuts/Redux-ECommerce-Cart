@@ -1,8 +1,10 @@
 import React from "react";
 import logo from "../logo.svg";
 import { Navbar, Button, Badge, NavbarBrand } from "reactstrap";
+import { useSelector } from "react-redux";
 
 function NavBar() {
+  const cartSize = useSelector((state) => state.cartSize);
   return (
     <>
       <div>
@@ -21,7 +23,7 @@ function NavBar() {
           <Button disabled color="light" outline>
             My cart{" "}
             <Badge color="danger" fill="true">
-              12
+              {cartSize}
             </Badge>
           </Button>
         </Navbar>
