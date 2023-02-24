@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import {
   Card,
   CardBody,
@@ -7,8 +8,11 @@ import {
   Button,
   Badge,
 } from "reactstrap";
+import { addToCart } from "../Redux/cartAction";
 
-const ShopItem = ({ price, title, description }) => {
+const ShopItem = ({ id, price, title, description }) => {
+  const dispatch = useDispatch();
+
   return (
     <>
       <Card className="m-2">
@@ -28,7 +32,21 @@ const ShopItem = ({ price, title, description }) => {
           </div>
 
           <div className="d-flex mt-4 align-items-center justify-content-end">
-            <Button color="primary" outline className="mx-3">
+            <Button
+              onClick={() =>
+                dispatch(
+                  addToCart({
+                    id,
+                    itemBasePrice: price,
+                    itemTitle: title,
+                    itemQuantity: 1,
+                  })
+                )
+              }
+              color="primary"
+              outline
+              className="mx-3"
+            >
               Add to Cart
             </Button>
           </div>

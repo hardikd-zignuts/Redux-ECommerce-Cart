@@ -8,23 +8,28 @@ import {
   CardText,
 } from "reactstrap";
 
-const CartItem = () => {
+const CartItem = ({
+  itemQuantity,
+  itemPrice,
+  itemBasePrice,
+  itemTitle,
+}) => {
   return (
     <>
-      <Card>
+      <Card className="m-2">
         <CardBody>
           <div className="d-flex align-items-center justify-content-between">
-            <CardTitle tag="h5">Man Perfume</CardTitle>
+            <CardTitle tag="h5">{itemTitle}</CardTitle>
             <div className="d-flex align-items-center justify-content-between">
-              <CardText>$54.00</CardText>
+              <CardText>${itemPrice}.00</CardText>
               <CardSubtitle className="mb-2 text-muted" tag="h6">
-                ($6.00/item)
+                (${itemBasePrice}.00/item)
               </CardSubtitle>
             </div>
           </div>
 
           <div className="d-flex mt-4 align-items-center justify-content-between">
-            <CardText>✖9</CardText>
+            <CardText>✖{itemQuantity}</CardText>
             <div>
               <Button color="success" className="mx-3">
                 +
