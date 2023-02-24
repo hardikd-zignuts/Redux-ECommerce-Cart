@@ -1,7 +1,7 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from "./cartTypes"
 
 const initialData = {
-    cartSize: 20,
+    cartSize: 0,
     cartData: [
         // {
         //     id: 'p1',
@@ -22,10 +22,10 @@ const checkItem = (itemObj, state) => {
     }
 }
 
-const increaseQuantity = (STATE, PAYLOAD) => {
+const increaseQuantity = (STATE, PAYLOAD, PROPERTY) => {
     let arr = [...STATE.cartData]
     let foundIndex = arr.findIndex(item => item.id === PAYLOAD.id);
-    arr[foundIndex].itemQuantity++;
+    arr[foundIndex][PROPERTY]++;
     return arr;
 }
 
@@ -35,19 +35,21 @@ const cartReducer = (state = initialData, action) => {
     switch (action.type) {
         case ADD_TO_CART:
             if (checkItem(action.payLoad, state)) {
-                tempArr = increaseQuantity(state, action.payLoad)
+                tempArr = increaseQuantity(state, action.payLoad, 'itemQuantity')
             } else {
                 tempArr = [action.payLoad, ...state.cartData]
             }
             return {
                 ...state,
+                cartSize: state.cartSize + 1,
                 cartData: tempArr
             }
 
         case REMOVE_FROM_CART:
 
             return {
-
+                ...state,
+                cartSize: state.cartSize++,
             }
         default:
             return state
