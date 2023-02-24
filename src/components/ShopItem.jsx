@@ -40,6 +40,7 @@ const ShopItem = ({ id, price, title, description }) => {
                     itemBasePrice: price,
                     itemTitle: title,
                     itemQuantity: 1,
+                    itemPrice: price,
                   })
                 )
               }

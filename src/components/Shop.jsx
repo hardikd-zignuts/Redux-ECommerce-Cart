@@ -10,6 +10,7 @@ const Shop = () => {
           return (
             <ShopItem
               key={id}
+              id={id}
               price={price}
               description={description}
               title={title}

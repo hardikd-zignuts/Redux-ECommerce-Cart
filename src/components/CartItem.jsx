@@ -8,12 +8,7 @@ import {
   CardText,
 } from "reactstrap";
 
-const CartItem = ({
-  itemQuantity,
-  itemPrice,
-  itemBasePrice,
-  itemTitle,
-}) => {
+const CartItem = ({ itemQuantity, itemPrice, itemBasePrice, itemTitle }) => {
   return (
     <>
       <Card className="m-2">
