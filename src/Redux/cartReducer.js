@@ -29,6 +29,16 @@ const increaseQuantity = (STATE, PAYLOAD, PROPERTY) => {
     return arr;
 }
 
+const decreaseQuantity = (STATE, PAYLOAD, PROPERTY) => {
+    let arr = [...STATE.cartData]
+    let foundIndex = arr.findIndex(item => item.id === PAYLOAD.id);
+    arr[foundIndex][PROPERTY]--;
+    if (arr[foundIndex][PROPERTY] === 0) {
+        arr.splice(foundIndex, 1)
+    }
+    return arr;
+}
+
 const cartReducer = (state = initialData, action) => {
     let tempArr;
 
@@ -47,9 +57,18 @@ const cartReducer = (state = initialData, action) => {
 
         case REMOVE_FROM_CART:
 
+            if (checkItem(action.payLoad, state)) {
+                //decrease property
+                tempArr = decreaseQuantity(state, action.payLoad, 'itemQuantity')
+            } else {
+                // tempArr = [action.payLoad, ...state.cartData]
+                tempArr = [...state]
+            }
+
             return {
                 ...state,
-                cartSize: state.cartSize++,
+                cartSize: state.cartSize - 1,
+                cartData: tempArr
             }
         default:
             return state

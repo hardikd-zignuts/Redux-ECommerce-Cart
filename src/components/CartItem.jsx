@@ -1,6 +1,6 @@
 import React from "react";
-// import { useDispatch } from "react-redux";
-// import { removeFromCart } from "../Redux/cartAction";
+import { useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../Redux/cartAction";
 import {
   Card,
   CardBody,
@@ -10,8 +10,15 @@ import {
   CardText,
 } from "reactstrap";
 
-const CartItem = ({ itemQuantity, itemPrice, itemBasePrice, itemTitle }) => {
-  // const dispatch = useDispatch();
+const CartItem = ({
+  id,
+  itemQuantity,
+  itemPrice,
+  itemBasePrice,
+  itemTitle,
+}) => {
+  const dispatch = useDispatch();
+
   return (
     <>
       <Card className="m-2">
@@ -27,12 +34,20 @@ const CartItem = ({ itemQuantity, itemPrice, itemBasePrice, itemTitle }) => {
           </div>
 
           <div className="d-flex mt-4 align-items-center justify-content-between">
-            <CardText>✖{itemQuantity}</CardText>
+            <CardText>×{itemQuantity}</CardText>
             <div>
-              <Button color="success" className="mx-3">
+              <Button
+                onClick={() => dispatch(addToCart({ id }))}
+                color="success"
+                className="mx-3"
+              >
                 +
               </Button>
-              <Button color="danger" className="mx-3">
+              <Button
+                onClick={() => dispatch(removeFromCart({ id }))}
+                color="danger"
+                className="mx-3"
+              >
                 -
               </Button>
             </div>
